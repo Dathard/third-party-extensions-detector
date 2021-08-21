@@ -23,7 +23,7 @@ let Detector = {
                 }
             });
             return json;
-        })();Z
+        })();
 
         console.log(json);
 
