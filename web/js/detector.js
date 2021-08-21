@@ -9,6 +9,30 @@ let Detector = {
         var installModules = this.prepareExtensionsList(configCode),
             detectThirdPartyExtensions = this.detectThirdPartyExtensions(installModules);
 
+        var json;
+
+        var json = (function() {
+            var json = null;
+            $.ajax({
+                'async': false,
+                'global': false,
+                'url': "web/js/defaultExtensions.json",
+                'dataType': "json",
+                'success': function(data) {
+                    json = data;
+                }
+            });
+            return json;
+        })();Z
+
+        console.log(json);
+
+        // fetch("web/js/defaultExtensions.json")
+        //     .then(response => {
+        //         return response.json();
+        //     })
+        //     .then(data => console.log(data));
+
         console.log(magentoVersion);
         console.log(configCode);
         console.log(installModules);
