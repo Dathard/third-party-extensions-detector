@@ -1,4 +1,5 @@
 let Detector = {
+    defaultExtensionsJson: "web/js/defaultExtensions.json",
     resultTabsSelector: '.result-page-container .tabs .tab',
 
     run: function (form) {
@@ -8,30 +9,6 @@ let Detector = {
 
         var installModules = this.prepareExtensionsList(configCode),
             detectThirdPartyExtensions = this.detectThirdPartyExtensions(installModules);
-
-        var json;
-
-        var json = (function() {
-            var json = null;
-            $.ajax({
-                'async': false,
-                'global': false,
-                'url': "web/js/defaultExtensions.json",
-                'dataType': "json",
-                'success': function(data) {
-                    json = data;
-                }
-            });
-            return json;
-        })();
-
-        console.log(json);
-
-        // fetch("web/js/defaultExtensions.json")
-        //     .then(response => {
-        //         return response.json();
-        //     })
-        //     .then(data => console.log(data));
 
         console.log(magentoVersion);
         console.log(configCode);
@@ -92,15 +69,34 @@ let Detector = {
 
         return thirdPartyExtensions;
     },
+    getDefaultExtensions: function () {
+        var json = (function() {
+            var json = null;
+            $.ajax({
+                'async': false,
+                'global': false,
+                'url': this.defaultExtensionsJson,
+                'dataType': "json",
+                'success': function(data) {
+                    json = data;
+                }
+            });
+            return json;
+        })();
+
+        return json;
+    },
     /**
      * @param {string} magentoVersion - Magento version
      */
     getMagentoDefaultExtensions: (magentoVersion) => {
-        switch(magentoVersion) {
-            case '2.3.1':
-                return [];
-            default:
-                return false;
+        var defaultExtensions = this.getDefaultExtensions(),
+            magentoVersionExtensions = defaultExtensions[magentoVersion];
+
+        if (! magentoVersionExtensions) {
+            magentoVersionExtensions = false;
         }
+
+        return magentoVersionExtensions;
     }
 }

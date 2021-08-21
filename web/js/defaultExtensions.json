@@ -1,14 +1,4 @@
 {
-  "id": "whatever",
-  "name": "start",
-  "children": [
-    {
-      "id": "0.9685",
-      "name": " contents:queue"
-    },
-    {
-      "id": "0.79281",
-      "name": " contents:mqq_error"
-    }
-  ]
+  "2.3.4": ["Magento_InventoryImportExport","Magento_InventoryIndexer","Magento_InventoryLowQuantityNotification","Magento_InventoryLowQuantityNotificationAdminUi","Magento_InventoryLowQuantityNotificationApi","Magento_InventoryMultiDimensionalIndexerApi","Magento_InventoryProductAlert","Magento_InventoryReservations","Magento_InventoryReservationsApi","Magento_InventoryCache","Magento_InventorySalesAdminUi","Magento_InventorySalesApi","Magento_InventorySalesFrontendUi","Magento_InventoryShipping","Magento_Shipping","Magento_InventorySourceDeductionApi","Magento_InventorySourceSelection","Magento_InventorySourceSelectionApi","Magento_LayeredNavigation","Magento_Marketplace","Magento_MediaStorage","Magento_MessageQueue","Magento_GroupedProductSampleData","Magento_MsrpSampleData","Magento_Multishipping","Magento_MysqlMq","Magento_NewRelicReporting","Magento_ProductAlert","Magento_OfflinePayments","Magento_SalesRule","Magento_OfflineShipping","Magento_PageCache","Magento_Captcha","Klarna_Ordermanagement","Magento_Persistent","Magento_Reports","Magento_Bundle","Magento_ProductVideo","Amazon_Login","Magento_QuoteAnalytics","Magento_QuoteGraphQl","Magento_ReleaseNotification","Magento_Review","Magento_RequireJs","Magento_SendFriend","Magento_ReviewAnalytics","Magento_BundleSampleData","Magento_Robots","Magento_Rss","Magento_ThemeSampleData","Amazon_Payment","Magento_SalesAnalytics","Magento_SalesInventory","Magento_OfflineShippingSampleData","Magento_DownloadableSampleData","Magento_TaxSampleData","Magento_ConfigurableSampleData","Magento_ProductLinksSampleData","Magento_Elasticsearch","Magento_CustomerAnalytics","Magento_Wishlist","Magento_InventoryShippingAdminUi","Magento_Signifyd","Magento_Sitemap","Magento_CatalogInventoryGraphQl","Magento_DownloadableGraphQl","Magento_Webapi","Magento_SwaggerWebapi","Magento_SwaggerWebapiAsync","Magento_Swatches","Magento_SwatchesGraphQl","Magento_SwatchesLayeredNavigation","Magento_SwatchesSampleData","Magento_ReviewSampleData","Magento_TaxGraphQl","Magento_TaxImportExport","Magento_CustomerSampleData","Magento_ConfigurableProductSales","Magento_CmsSampleData","Magento_Tinymce3","Magento_Translation","Magento_GoogleOptimizer","Magento_Ups","Magento_SalesSampleData","Magento_UrlRewriteGraphQl","Magento_AsynchronousOperations","Magento_Usps","Magento_CatalogRuleSampleData","Klarna_Kp","Magento_Version","Magento_Swagger","Magento_WebapiAsync","Magento_WebapiSecurity","Magento_SalesRuleSampleData","Magento_WeeeGraphQl","Magento_CatalogWidget","Magento_WidgetSampleData","Dotdigitalgroup_Email","Magento_WishlistAnalytics","Magento_WishlistSampleData","Temando_Shipping","Vertex_Tax"],
+
 }
