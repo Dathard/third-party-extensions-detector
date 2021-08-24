@@ -136,10 +136,18 @@
 
 		.result-page-container .tabs-content {
 			padding-left: 10px;
+		}
+
+		.result-page-container .tabs-content .tab{
+			min-height: 100px;
 			max-height: 300px;
+			display: none;
 			overflow-y: auto;
 		}
 
+		.result-page-container .tabs-content .tab.active {
+			display: block;
+		}
 	</style>
 </head>
 <body>
@@ -148,11 +156,11 @@
 		<form name="mageinstall" onsubmit="Detector.run(this);return false;">
 			<div>
 				<label for="version">Magento version:</label>
-				<select id="version" name="magento_version" class="full-select" required >
-					<option>-- select version --</option>
-					<option value="2.3.6" selected>Magento Comunity 2.3.6 </option>
-				</select>
-				<label for="code">Сode with config.php:</label>
+				<select id="version" name="magento_version" class="full-select" required ></select>
+				<script type="text/javascript">
+					Detector.prepareMagentoVersionsField();
+				</script>
+				<label for="code">Code with config.php:</label>
 				<textarea id="code" name="config_code" rows="13" required ></textarea>
 				<button class="detect" type="submit">Start The Detection</button>
 			</div>
