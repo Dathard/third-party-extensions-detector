@@ -1,50 +1,68 @@
 let Detector = {
+    defaultExtensions: {},
+    resultPageContainerWrapper: '.result-page-container-wrapper',
     resultTabsSelector: '.result-page-container .tabs .tab',
+    resultTabsContentSelector: '.result-page-container .tabs-content .tab',
+    allResultsTabSelector: '.result-page-container .tabs .all-extensions',
+    disabledExtensionsResultsTabSelector: '.result-page-container .tabs .disabled-extensions',
+    enabledExtensionsResultsTabSelector: '.result-page-container .tabs .enabled-extensions',
+    allResultsTabContentSelector: '.result-page-container .tabs-content .all-extensions',
+    enabledExtensionsResultsTabContentSelector: '.result-page-container .tabs-content .enabled-extensions',
+    disabledExtensionsResultsTabContentSelector: '.result-page-container .tabs-content .disabled-extensions',
 
     run: function (form) {
-        var form = $(form),
-            magentoVersion = form.find('[name="magento_version"]:first').val(),
-            configCode = form.find('[name="config_code"]:first').val();
+        form = $(form);
+        let magentoVersion = form.find('[name="magento_version"]:first').val(),
+            configCode = form.find('[name="config_code"]:first').val(),
+            installModules = this.prepareExtensionsList(configCode),
+            thirdPartyExtensions = this.detectThirdPartyExtensions(installModules, magentoVersion);
 
-        var installModules = this.prepareExtensionsList(configCode),
-            detectThirdPartyExtensions = this.detectThirdPartyExtensions(installModules);
-
-        var json;
-
-        var json = (function() {
-            var json = null;
-            $.ajax({
-                'async': false,
-                'global': false,
-                'url': "web/js/defaultExtensions.json",
-                'dataType': "json",
-                'success': function(data) {
-                    json = data;
-                }
-            });
-            return json;
-        })();
-
-        console.log(json);
-
-        // fetch("web/js/defaultExtensions.json")
-        //     .then(response => {
-        //         return response.json();
-        //     })
-        //     .then(data => console.log(data));
-
-        console.log(magentoVersion);
-        console.log(configCode);
-        console.log(installModules);
+        if (thirdPartyExtensions) {
+            this.showDetectResults(thirdPartyExtensions);
+        }
     },
-    prepareResultPage: function (data) {
+    prepareMagentoVersionsField: function () {
+        var magentoVersions = Object.keys(this.getDefaultExtensions()),
+            html = '';
 
+        magentoVersions.forEach((version) => {
+            html += '<option value="' + version + '">Magento ' + version + ' </option>';
+        });
+
+        $('select[name="magento_version"]').html(html);
     },
-    switchResultTab: function (el) {
-        let self = this;
-        if (! $(el).hasClass('active')) {
-            $(this.resultTabsSelector).removeClass('active');
-            $(el).addClass('active');
+    showDetectResults: function (results) {
+        $(this.allResultsTabContentSelector).html(this.generateResultHtml(results.all));
+        $(this.enabledExtensionsResultsTabContentSelector).html(this.generateResultHtml(results.enabled));
+        $(this.disabledExtensionsResultsTabContentSelector).html(this.generateResultHtml(results.disabled));
+        this.switchResultTab($(this.allResultsTabSelector));
+        $(this.resultPageContainerWrapper).addClass('active');
+    },
+    /**
+     * @param {array} list - Extensions list
+     */
+    generateResultHtml: function (list) {
+        let html = '';
+
+        list.forEach((el) => {
+            html += '<p>' + el +  '</p>';
+        });
+
+        return html;
+    },
+    switchResultTab: function (activeTab) {
+        activeTab = $(activeTab);
+
+        $(this.resultTabsSelector).removeClass('active');
+        $(this.resultTabsContentSelector).removeClass('active');
+        activeTab.addClass('active');
+
+        if (activeTab.hasClass('all-extensions')) {
+            $(this.allResultsTabContentSelector).addClass('active');
+        } else if (activeTab.hasClass('enabled-extensions')) {
+            $(this.enabledExtensionsResultsTabContentSelector).addClass('active');
+        } else if (activeTab.hasClass('disabled-extensions')) {
+            $(this.disabledExtensionsResultsTabContentSelector).addClass('active');
         }
     },
     /**
@@ -63,23 +81,24 @@ let Detector = {
         return modules;
     },
     /**
-     * @param {string} extensionsList підготовлений списое екстеншинів (вокирист. prepareExtensionsList)
+     * @param {array} extensionsList prepare extensions list (use prepareExtensionsList)
      * @param {string} magentoVersion - Magento version
      */
     detectThirdPartyExtensions: function (extensionsList, magentoVersion) {
-        let defaultExtensions = this.getMagentoDefaultExtensions(magentoVersion);
-        let thirdPartyExtensions = {
+        let defaultExtensions = this.getMagentoDefaultExtensions(magentoVersion),
+            thirdPartyExtensions = {
             all: [],
             enabled: [],
             disabled: []
         }
 
-        if (defaultExtensions == false) {
+        if (! extensionsList.length > 0
+            || defaultExtensions == false) {
             return false;
         }
 
         extensionsList.forEach((item) => {
-            if (defaultExtensions.includes(item.extension)) {
+            if (! defaultExtensions.includes(item.extension)) {
                 thirdPartyExtensions.all.push(item.extension);
                 if (item.status == 1) {
                     thirdPartyExtensions.enabled.push(item.extension);
@@ -92,15 +111,36 @@ let Detector = {
 
         return thirdPartyExtensions;
     },
+    getDefaultExtensions: function () {
+        if ($.isEmptyObject(this.defaultExtensions)) {
+            this.defaultExtensions = (function() {
+                var json = null;
+                $.ajax({
+                    'async': false,
+                    'global': false,
+                    'url': 'web/js/defaultExtensions.json',
+                    'dataType': "json",
+                    'success': function(data) {
+                        json = data;
+                    }
+                });
+                return json;
+            })();
+        }
+
+        return this.defaultExtensions;
+    },
     /**
      * @param {string} magentoVersion - Magento version
      */
-    getMagentoDefaultExtensions: (magentoVersion) => {
-        switch(magentoVersion) {
-            case '2.3.1':
-                return [];
-            default:
-                return false;
+    getMagentoDefaultExtensions: function (magentoVersion) {
+        let defaultExtensions = this.getDefaultExtensions(),
+             magentoVersionExtensions = defaultExtensions[magentoVersion];
+
+        if (! magentoVersionExtensions) {
+            magentoVersionExtensions = false;
         }
+
+        return magentoVersionExtensions;
     }
 }
