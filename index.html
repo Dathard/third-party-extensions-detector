@@ -1,154 +1,11 @@
-
 <html>
 <head>
 	<title>Magento 2 Third Party Extensions Detector</title>
+	<link rel="icon" href="web/images/detector.png">
+	<link rel="stylesheet" href="web/css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="web/js/detector.js"></script>
-	<style>
-		body,
-		.result-page-container-wrapper {
-			-webkit-align-items: center;
-			align-items: center;
-			display: -webkit-flex;
-			display: -ms-flexbox;
-			display: flex;
-			background-color: #373330;
-			max-height: 100vh;
-			min-width: 50rem;
-		}
-		.page-container,
-		.result-page-container {
-			-webkit-flex-grow: 0;
-			flex-grow: 0;
-			-webkit-flex-shrink: 0;
-			flex-shrink: 0;
-			background-color: #ffffff;
-			border: 1px solid #e3e3e3;
-			box-shadow: 0 5px 30px 0 #000000;
-			display: block;
-			float: none;
-			margin: auto;
-			max-width: 45rem;
-			min-width: 0;
-			padding: 30px 60px;
-			position: relative;
-			width: 380px;
-			z-index: 1;
-		}
-		h2 {
-			display: block;
-			margin: 0 auto;
-			padding-bottom: 18px;
-			text-align: center;
-			font-family: sans-serif;
-		}
-		select, 
-		textarea {
-			width: 100%;
-			padding: 5px;
-			margin-bottom: 10px;
-			border: 1px solid #b7b7b7;
-			background-color: white;
-			border-radius: 1px;
-			margin-top: 3px;
-		}
-		textarea {
-			resize: none;
-		}
-		.detect {
-			background-color: #eb5202;
-			color: #ffffff;
-			text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
-			padding: 15px 20px;
-			font-size: 19px;
-			cursor: pointer;
-			margin-top: 10px;
-			width: 100%;
-			border: 1px solid #eb5202;
-		}
-		.detect:hover {
-			background-color: #ba4000;
-			border-color: #b84002;
-		}
-		
-		.result-page-container-wrapper {
-			position: fixed;
-			z-index: 999;
-			width: 100vw;
-			height: 100vh;
-			top: 0px;
-			left: 0px;
-			display: none;
-		}
-
-		.result-page-container-wrapper.active {
-			display: inherit;
-		}
-
-		.result-page-container {
-			padding: 20px 15px;
-			width: 540px;
-		}
-
-		.result-page-container .tabs {
-			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
-		}
-
-		.result-page-container .tabs .tab {
-			background: #e3e3e3;
-			border: 0.1rem solid #adadad;
-			border-bottom: none;
-			color: #41362f;
-			text-align: center;
-			margin: 0px 2px;
-		}
-
-		.result-page-container .tabs .tab:hover {
-			color: #41362f;
-			background: #d6d6d6;
-			cursor: pointer;
-		}
-
-		.result-page-container .tabs .tab:first-child {
-			margin-left: 0px;
-		}
-
-		.result-page-container .tabs .tab:last-child {
-			margin-right: 0px;
-		}
-
-		.result-page-container .tabs .tab.active {
-			background: #ffffff;
-			border-bottom: 0;
-			margin-bottom: -1px;
-			z-index: 1;
-		}
-
-		.result-page-container .tabs .tab.active:hover {
-			cursor: default;
-		}
-
-		.result-page-container .tabs-content-wrapper {
-			border: 0.1rem solid #adadad;
-			padding-top: 5px;
-		}
-
-		.result-page-container .tabs-content {
-			padding-left: 10px;
-		}
-
-		.result-page-container .tabs-content .tab{
-			min-height: 100px;
-			max-height: 300px;
-			display: none;
-			overflow-y: auto;
-		}
-
-		.result-page-container .tabs-content .tab.active {
-			display: block;
-		}
-	</style>
+	<script src="web/js/operations.js"></script>
 </head>
 <body>
 	<div class="page-container">
@@ -183,38 +40,13 @@
 			</div>
 			<div class="tabs-content-wrapper">
 				<div class="tabs-content">
-					<div class="tab all-extensions">
-						<p>Magento_SwatchesGraphQl</p>
-						<p>Magento_TaxGraphQl</p>
-						<p>Magento_CmsSampleData</p>
-						<p>Magento_GoogleOptimizer</p>
-						<p>Magento_SwatchesGraphQl</p>
-						<p>Magento_TaxGraphQl</p>
-						<p>Magento_CmsSampleData</p>
-						<p>Magento_GoogleOptimizer</p>
-						<p>Magento_SwatchesGraphQl</p>
-						<p>Magento_TaxGraphQl</p>
-						<p>Magento_CmsSampleData</p>
-						<p>Magento_GoogleOptimizer</p>
-						<p>Magento_SwatchesGraphQl</p>
-						<p>Magento_TaxGraphQl</p>
-						<p>Magento_CmsSampleData</p>
-						<p>Magento_GoogleOptimizer</p>
-						<p>Magento_SwatchesGraphQl</p>
-						<p>Magento_TaxGraphQl</p>
-						<p>Magento_CmsSampleData</p>
-						<p>Magento_GoogleOptimizer</p>
-					</div>
+					<button id="copy" onclick="Operations.copyActiveResultTabContent()">Copy</button>
+					<div class="tab all-extensions"></div>
 					<div class="tab enabled-extensions"></div>
 					<div class="tab disabled-extensions"></div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
-
-
-
 </body>
 </html>

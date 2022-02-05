@@ -32,20 +32,41 @@ let Detector = {
         $('select[name="magento_version"]').html(html);
     },
     showDetectResults: function (results) {
-        $(this.allResultsTabContentSelector).html(this.generateResultHtml(results.all));
-        $(this.enabledExtensionsResultsTabContentSelector).html(this.generateResultHtml(results.enabled));
-        $(this.disabledExtensionsResultsTabContentSelector).html(this.generateResultHtml(results.disabled));
+        $(this.allResultsTabContentSelector)
+            .data("content", this.prepareDataAttributeValue(results.all))
+            .html(this.prepareResultHtml(results.all));
+        $(this.enabledExtensionsResultsTabContentSelector)
+            .data("content", this.prepareDataAttributeValue(results.enabled))
+            .html(this.prepareResultHtml(results.enabled));
+        $(this.disabledExtensionsResultsTabContentSelector)
+            .data("content", this.prepareDataAttributeValue(results.disabled))
+            .html(this.prepareResultHtml(results.disabled));
+
         this.switchResultTab($(this.allResultsTabSelector));
         $(this.resultPageContainerWrapper).addClass('active');
     },
     /**
      * @param {array} list - Extensions list
+     * @return {string}
      */
-    generateResultHtml: function (list) {
+    prepareDataAttributeValue: function (list) {
+        let value = '';
+
+        list.forEach((el) => {
+            value += el + '\n';
+        });
+
+        return value;
+    },
+    /**
+     * @param {array} list - Extensions list
+     * @return {string}
+     */
+    prepareResultHtml: function (list) {
         let html = '';
 
         list.forEach((el) => {
-            html += '<p>' + el +  '</p>';
+            html += '<p>' + el + '</p>';
         });
 
         return html;
