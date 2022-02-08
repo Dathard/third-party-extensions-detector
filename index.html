@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>Magento 2 Third Party Extensions Detector</title>
+    <link rel="icon" href="web/images/detector.png">
+    <link rel="stylesheet" href="web/css/style.css">
+    <script src="web/js/libs/requirejs/requirejs.js"></script>
+    <script src="web/js/requirejs-config.js"></script>
+</head>
+<body>
+    <div class="page-container">
+        <h2>Magento 2 Third Party Extensions Detector</h2>
+        <form name="detector_config">
+            <div>
+                <label for="version">Magento version:</label>
+                <select id="version" name="magento_version" class="full-select" required></select>
+                <label for="code">Code with config.php:</label>
+                <textarea id="code" name="config_code" rows="13" required></textarea>
+                <button class="detect" type="submit">Start The Detection</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="result-page-container-wrapper">
+        <div class="result-page-container">
+            <h2>Result Page</h2>
+            <div class="tabs">
+                <div class="tab all-extensions active">
+                    <p>All Extensions</p>
+                </div>
+                <div class="tab enabled-extensions">
+                    <p>Enabled Extensions</p>
+                </div>
+                <div class="tab disabled-extensions">
+                    <p>Disabled Extensions</p>
+                </div>
+            </div>
+            <div class="tabs-content-wrapper">
+                <div class="tabs-content">
+                    <button id="copy" onclick="Operations.copyActiveResultTabContent()">Copy</button>
+                    <div class="tab all-extensions"></div>
+                    <div class="tab enabled-extensions"></div>
+                    <div class="tab disabled-extensions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        require(['domReady', 'detector'], function (domReady, detector) {
+            domReady(function () {
+                detector.initialize();
+            });
+        });
+    </script>
+</body>
+</html>
