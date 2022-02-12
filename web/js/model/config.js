@@ -5,6 +5,20 @@ define([
         defaultExtensions: {},
 
         /**
+         * @param {string} magentoVersion - Magento version
+         * @return {Object}
+         */
+        getDefaultExtensionsByMagentoVersion: function (magentoVersion) {
+            let magentoVersionExtensions = this.getDefaultExtensions()[magentoVersion];
+
+            if (! magentoVersionExtensions) {
+                magentoVersionExtensions = [];
+            }
+
+            return magentoVersionExtensions;
+        },
+
+        /**
          * @return {Object}
          */
         getDefaultExtensions: function () {

@@ -5,11 +5,11 @@ define([
     return {
         magentoVersionsFieldSelector: 'form[name="detector_config"] select[name="magento_version"]',
 
-        initialize: function () {
-            this.initMagentoVersionsField();
+        build: function () {
+            this.buildMagentoVersionsField();
         },
 
-        initMagentoVersionsField: function () {
+        buildMagentoVersionsField: function () {
             let magentoVersions = Object.keys(config.getDefaultExtensions()),
                 html = '';
 

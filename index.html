@@ -24,19 +24,19 @@
         <div class="result-page-container">
             <h2>Result Page</h2>
             <div class="tabs">
-                <div class="tab all-extensions active">
+                <div id="all-extensions" class="tab">
                     <p>All Extensions</p>
                 </div>
-                <div class="tab enabled-extensions">
+                <div id="enabled-extensions" class="tab">
                     <p>Enabled Extensions</p>
                 </div>
-                <div class="tab disabled-extensions">
+                <div id="disabled-extensions" class="tab">
                     <p>Disabled Extensions</p>
                 </div>
             </div>
             <div class="tabs-content-wrapper">
                 <div class="tabs-content">
-                    <button id="copy" onclick="Operations.copyActiveResultTabContent()">Copy</button>
+                    <button id="copy">Copy</button>
                     <div class="tab all-extensions"></div>
                     <div class="tab enabled-extensions"></div>
                     <div class="tab disabled-extensions"></div>
@@ -46,9 +46,14 @@
     </div>
 
     <script type="text/javascript">
-        require(['domReady', 'detector'], function (domReady, detector) {
+        require([
+            'domReady',
+            'detector',
+            'operations'
+        ], function (domReady, detector, operations) {
             domReady(function () {
                 detector.initialize();
+                operations.initialize();
             });
         });
     </script>
