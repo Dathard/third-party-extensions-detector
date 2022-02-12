@@ -3,15 +3,17 @@ let config = {
     paths: {
         'domReady': 'libs/requirejs/domReady',
         'jquery': 'libs/jquery.min',
-        'detector': 'detector',
+
         'checkModel': 'model/check',
+        'config': 'model/config',
+        'detector': 'detector',
+        'detectorFormPage': 'model/page/detector-form',
+        'extensionsListDecorator': 'model/decorator/extensions-list',
         'extensionsListParser': 'model/parser/extensions-list',
         'formBuilder': 'builder/form',
+        'operations': 'model/operations',
         'resultPage': 'model/page/result',
         'resultPageBuilder': 'builder/result-page',
-        'extensionsListDecorator': 'model/decorator/extensions-list',
-        'config': 'model/config',
-        'operations': 'model/operations'
     }
 };
 

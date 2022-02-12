@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Magento 2 Third Party Extensions Detector</title>
-    <link rel="icon" href="web/images/detector.png">
+    <link rel="icon" href="web/images/detector.webp">
     <link rel="stylesheet" href="web/css/style.css">
     <script src="web/js/libs/requirejs/requirejs.js"></script>
     <script src="web/js/requirejs-config.js"></script>
@@ -24,15 +24,9 @@
         <div class="result-page-container">
             <h2>Result Page</h2>
             <div class="tabs">
-                <div id="all-extensions" class="tab">
-                    <p>All Extensions</p>
-                </div>
-                <div id="enabled-extensions" class="tab">
-                    <p>Enabled Extensions</p>
-                </div>
-                <div id="disabled-extensions" class="tab">
-                    <p>Disabled Extensions</p>
-                </div>
+                <div id="all-extensions" class="tab"><p>All Extensions</p></div>
+                <div id="enabled-extensions" class="tab"><p>Enabled Extensions</p></div>
+                <div id="disabled-extensions" class="tab"><p>Disabled Extensions</p></div>
             </div>
             <div class="tabs-content-wrapper">
                 <div class="tabs-content">
@@ -47,14 +41,12 @@
 
     <script type="text/javascript">
         require([
-            'domReady',
+            'domReady!',
             'detector',
             'operations'
         ], function (domReady, detector, operations) {
-            domReady(function () {
-                detector.initialize();
-                operations.initialize();
-            });
+            detector.initialize();
+            operations.initialize();
         });
     </script>
 </body>

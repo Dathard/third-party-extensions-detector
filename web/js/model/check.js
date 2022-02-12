@@ -1,11 +1,10 @@
 define([
     'jquery',
     'config',
+    'detectorFormPage',
     'extensionsListParser'
-], function ($, config, extensionsListParser) {
+], function ($, config, detectorFormPage, extensionsListParser) {
     return {
-        detectorFormSelector: 'form[name="detector_config"]',
-
         /**
          * @return {null|Object}
          */
@@ -31,7 +30,7 @@ define([
          * @return {{extensions: string, magentoVersion: array}}
          */
         getDetectorFormData: function () {
-            let detectorForm = $(this.detectorFormSelector);
+            let detectorForm = $(detectorFormPage.detectorFormSelector);
 
             return  {
                 magentoVersion: detectorForm.find('[name="magento_version"]:first').val(),

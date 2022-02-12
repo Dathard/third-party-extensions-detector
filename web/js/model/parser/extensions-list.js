@@ -7,7 +7,7 @@ define([], function () {
         parse: function (extensionsList) {
             let extensions = [];
 
-            let matchAll = extensionsList.matchAll(/\'([a-zA-Z_-]+)\'.?=>.?([01])/g);
+            let matchAll = extensionsList.matchAll(/\'([a-zA-Z_-]+_[a-zA-Z_-]+)\'.?=>.?([01])/g);
 
             Array.from(matchAll).forEach(function(match) {
                 extensions.push({

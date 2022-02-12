@@ -1,10 +1,9 @@
 define([
     'jquery',
-    'config'
-], function ($, config) {
+    'config',
+    'detectorFormPage'
+], function ($, config, detectorFormPage) {
     return {
-        magentoVersionsFieldSelector: 'form[name="detector_config"] select[name="magento_version"]',
-
         build: function () {
             this.buildMagentoVersionsField();
         },
@@ -17,7 +16,7 @@ define([
                 html += '<option value="' + version + '">Magento ' + version + ' </option>';
             });
 
-            $(this.magentoVersionsFieldSelector).html(html);
+            $(detectorFormPage.magentoVersionsFieldSelector).html(html);
         }
     }
 });

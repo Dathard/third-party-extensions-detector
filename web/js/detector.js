@@ -1,14 +1,15 @@
 define([
     'jquery',
+    'checkModel',
+    'detectorFormPage',
     'formBuilder',
-    'resultPageBuilder',
-    'checkModel'
-], function ($, formBuilder, resultPageBuilder, checkModel) {
+    'resultPageBuilder'
+], function ($, checkModel, detectorFormPage, formBuilder, resultPageBuilder) {
     return {
         initialize: function () {
             formBuilder.build();
 
-            $('form[name="detector_config"]').on('submit', function(event) {
+            $(detectorFormPage.detectorFormSelector).on('submit', function(event) {
                 event.preventDefault();
 
                 let thirdPartyExtensions = checkModel.execute();
